@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Course
+use App\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -17,7 +17,7 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view("index" [
+        return view("courses.courses", [
           "courses" => $courses
         ]);
     }
@@ -29,7 +29,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view("index");
+        return view("courses.create");
     }
 
     /**
@@ -43,18 +43,16 @@ class CourseController extends Controller
         $course = new Course;
         $course->name = $request->name;
         $course->description = $request->description;
-        $course->image = $request->image;
 
         if ($course->title == NULL
-        or $course->description == NULL
-        or $course->image == NULL) { //Maybe remove and check if image in view
+        or $course->description == NULL) { //Maybe remove and check if image in view
          return redirect()->back();
         }
         else {
           $course->save();
-          return view("index");
+          return view("courses.courses");
         }
-
+      }
     /**
      * Display the specified resource.
      *
@@ -64,7 +62,8 @@ class CourseController extends Controller
     public function show($id)
     {
         $course = Course::find($id);
-        return view("index", [
+        $course->projects = $course->projects;
+        return view("courses.show", [
           "course" => $course
         ]);
     }
@@ -78,7 +77,7 @@ class CourseController extends Controller
     public function edit($id)
     {
         $course = Course::find($id);
-        return view ("index", [
+        return view ("courses.edit", [
           "course" => $course
         ]);
     }
@@ -95,9 +94,8 @@ class CourseController extends Controller
         $course = Course::find($id);
         $course->name = $request->name;
         $course->description = $request->description;
-        $course->image = $request->image;
-        $couse->save();
-        return view("index");
+        $course->save();
+        return view("courses.courses");
     }
 
     /**
@@ -109,6 +107,6 @@ class CourseController extends Controller
     public function destroy($id)
     {
         Course::destroy($id);
-        return view("welcome");
+        return view("courses.courses");
     }
 }

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Tool
+use App\Tool;
 use Illuminate\Http\Request;
 
 class ToolController extends Controller
@@ -18,7 +18,7 @@ class ToolController extends Controller
     public function index()
     {
       $tools = Tool::all();
-        return view("index", [
+        return view("tools.tools", [
           "tools" => $tools
         ]);
 
@@ -31,7 +31,7 @@ class ToolController extends Controller
      */
     public function create()
     {
-        return view("index");
+        return view("tools.create");
     }
 
     /**
@@ -54,7 +54,7 @@ class ToolController extends Controller
         }
         else {
           $tool->save();
-        return view("index");
+        return view("tools.index");
         }
     }
 
@@ -67,7 +67,8 @@ class ToolController extends Controller
     public function show($id)
     {
         $tool = Tool::find($id);
-        return view("index", [
+        $tool->projects = $tool->projects;
+        return view("tools.show", [
           "tool" => $tool
         ]);
     }
@@ -81,7 +82,7 @@ class ToolController extends Controller
     public function edit($id)
     {
         $tool = Tool::find(id);
-        return view("index", [
+        return view("tools.edit", [
           "tool" => $tool
         ]);
     }
@@ -95,7 +96,7 @@ class ToolController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $tool = Project::find($id);
+      $tool = Tool::find($id);
       $tool->title = $request->title;
       $tool->description = $request->description;
       $tool->image = $request->image;
