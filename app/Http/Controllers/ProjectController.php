@@ -18,8 +18,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Projects::all();
-        return view("index", [
+        $projects = Project::all();
+        return view("projects.projects", [
           "projects" => $projects
         ]);
     }
@@ -31,7 +31,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view ("index");
+        return view ("projects.create");
     }
 
     /**
@@ -47,7 +47,7 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->image = $request->image;
 
-        if ($project->title == NULL
+      /*  if ($project->title == NULL
         or $project->description == NULL
         or $project->image == NULL) {
          return redirect()->back();
@@ -63,11 +63,9 @@ class ProjectController extends Controller
             ]);
             $project->save();
             return view("index");
-        }
-
-
-
-
+        }*/
+        $project->save();
+      }
     /**
      * Display the specified resource.
      *
@@ -78,7 +76,7 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $tools = Tool::all();
-        return view("index", [
+        return view("projects.show", [
           "project" => $project,
           "tools" => $tools
         ]);
@@ -93,7 +91,7 @@ class ProjectController extends Controller
     public function edit($id)
     {
         $project = Project::find($id);
-        return view ("index", [
+        return view ("projects.edit", [
           "project" => $project
         ]);
     }
@@ -125,6 +123,6 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         Project::destroy($id);
-        return view("welcome");
+        return view("index");
     }
 }

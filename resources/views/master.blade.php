@@ -44,7 +44,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="/">Start</a></li>
-              <li><a href="/portfolio">Portfolio</a></li>
+              <li><a href="/projects">Portfolio</a></li>
               <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>
             </ul>
