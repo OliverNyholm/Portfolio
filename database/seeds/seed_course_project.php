@@ -11,6 +11,15 @@ class seed_course_project extends Seeder
      */
     public function run()
     {
-        //
+      DB::table('course_project')->insert([
+      [
+        "project_id" => 1,
+        "course_id" => 1
+      ],
+      [
+        "project_id" => 2,
+        "course_id" => 2
+      ],
+    ]);
     }
 }
