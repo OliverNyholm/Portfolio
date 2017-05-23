@@ -28,6 +28,7 @@ class CreateProjectToolTable extends Migration
      */
     public function down()
     {
-        Shema::drop(project_tool);
+        Schema::drop('project_tool');
     }
+
 }

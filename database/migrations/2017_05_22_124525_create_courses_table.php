@@ -15,7 +15,7 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table){
           $table->increments('id');
-          $table->text('title');
+          $table->text('name');
           $table->text('description');
           $table->timestamps();
         });
@@ -28,6 +28,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Shema::drop('courses');
+        Schema::drop('courses');
     }
 }
