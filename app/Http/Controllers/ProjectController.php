@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Project;
+use App\Tool;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -30,7 +31,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //return view ("create_project");
+        return view ("index");
     }
 
     /**
@@ -51,17 +52,20 @@ class ProjectController extends Controller
         or $project->image == NULL) {
          return redirect()->back();
         }
+        else {
+          $project_id = DB::connection->getPdo->lastInsertId();
+          $tool = $request->get("tool");
 
-        $project_id = DB::connection->getPdo->lastInsertId();
-        $tool = $request->get("tool");
+          DB::table('project_tool')->insert(
+            [
+              "project_id" => $project_id;
+              "tool_id" => $tool->id;
+            ]);
+            $project->save();
+            return view("index");
+        }
 
-        DB::table('project_tool')->insert(
-          [
-            "project_id" => $project_id;
-            "tool_id" => $tool->id;
-          ]);
-          $project->save();
-          return redirect()->back();
+
 
 
     /**

@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Tool
 use Illuminate\Http\Request;
 
 class ToolController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth', ['except' => ['index','show']]);
+  }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +17,11 @@ class ToolController extends Controller
      */
     public function index()
     {
-        //
+      $tools = Tool::all();
+        return view("index", [
+          "tools" => $tools
+        ]);
+
     }
 
     /**
@@ -23,7 +31,7 @@ class ToolController extends Controller
      */
     public function create()
     {
-        //
+        return view("index");
     }
 
     /**
@@ -34,7 +42,20 @@ class ToolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tool = new Tool;
+        $tool->name = $request->get('name');
+        $tool->description = $request->get('description');
+        $tool->image = $request->get('image');
+
+        if ($tool->name == NULL
+        or $tool->description == NULL
+        or $tool->image == NULL) {
+         return redirect()->back();
+        }
+        else {
+          $tool->save();
+        return view("index");
+        }
     }
 
     /**
@@ -45,7 +66,10 @@ class ToolController extends Controller
      */
     public function show($id)
     {
-        //
+        $tool = Tool::find($id);
+        return view("index", [
+          "tool" => $tool
+        ]);
     }
 
     /**
@@ -56,7 +80,10 @@ class ToolController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tool = Tool::find(id);
+        return view("index", [
+          "tool" => $tool
+        ]);
     }
 
     /**
@@ -68,7 +95,12 @@ class ToolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $tool = Project::find($id);
+      $tool->title = $request->title;
+      $tool->description = $request->description;
+      $tool->image = $request->image;
+      $tool->save();
+      return redirect()->back();
     }
 
     /**
@@ -79,6 +111,7 @@ class ToolController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Tool::destroy($id);
+        return view("welcome");
     }
 }

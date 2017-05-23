@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Course
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+  public function __construct(){
+    $this->middleware('auth', ['except' => ['index', 'show']]);
+  }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::all();
+        return view("index" [
+          "courses" => $courses
+        ]);
     }
 
     /**
@@ -23,7 +29,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view("index");
     }
 
     /**
@@ -34,8 +40,20 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $course = new Course;
+        $course->name = $request->name;
+        $course->description = $request->description;
+        $course->image = $request->image;
+
+        if ($course->title == NULL
+        or $course->description == NULL
+        or $course->image == NULL) { //Maybe remove and check if image in view
+         return redirect()->back();
+        }
+        else {
+          $course->save();
+          return view("index");
+        }
 
     /**
      * Display the specified resource.
@@ -45,7 +63,10 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::find($id);
+        return view("index", [
+          "course" => $course
+        ]);
     }
 
     /**
@@ -56,7 +77,10 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $course = Course::find($id);
+        return view ("index", [
+          "course" => $course
+        ]);
     }
 
     /**
@@ -68,7 +92,12 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course = Course::find($id);
+        $course->name = $request->name;
+        $course->description = $request->description;
+        $course->image = $request->image;
+        $couse->save();
+        return view("index");
     }
 
     /**
@@ -79,6 +108,7 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Course::destroy($id);
+        return view("welcome");
     }
 }
