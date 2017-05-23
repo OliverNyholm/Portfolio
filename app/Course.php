@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     public function projects(){
-      return $this->hasOne('App\Project');
+      return $this->belongsToMany('App\Project');
     }
 }

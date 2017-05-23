@@ -2,6 +2,7 @@
 
 
 @section('content')
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -13,26 +14,27 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <a href="/portfolio/1"><img src="https://www.mediabistro.com/wp-content/uploads/2016/02/tips-on-getting-your-copywriter-portfolio-started.jpg" alt="Portfolio One"></a>
+      <!--<a href="/projects/1"><img src="https://s-media-cache-ak0.pinimg.com/originals/fe/f3/ce/fef3ce4533219ab736a314809fa6f469.jpg" alt="Limbo"></a>-->
+      <a href="/projects/{{$projects[count($projects) - 3]->id}}"><img src="{{ $projects[count($projects) - 3]->image }}" alt="{{ $projects[count($projects) - 3]->title }}"></a>
       <div class="carousel-caption">
-        <h3>Portfolio work one</h3>
-        <p>This is very good game</p>
+        <h3>{{ $projects[count($projects) - 3]->title }}</h3>
+        <p>{{ $projects[count($projects) - 3]->description }}</p>
       </div>
     </div>
 
     <div class="item">
-      <a href="/portfolio/2"><img src="https://www.mediabistro.com/wp-content/uploads/2016/02/tips-on-getting-your-copywriter-portfolio-started.jpg" alt="Portfolio Two"></a>
+      <a href="/projects/{{$projects[count($projects) - 2]->id}}"><img src="{{ $projects[count($projects) - 2]->image }}" alt="{{ $projects[count($projects) - 2]->title }}"></a>
       <div class="carousel-caption">
-        <h3>Portfolio work two</h3>
-        <p>This is very good game too</p>
+        <h3>{{ $projects[count($projects) - 2]->title }}</h3>
+        <p>{{ $projects[count($projects) - 2]->description }}</p>
       </div>
     </div>
 
     <div class="item">
-      <a href="/portfolio/3"><img src="https://www.mediabistro.com/wp-content/uploads/2016/02/tips-on-getting-your-copywriter-portfolio-started.jpg" alt="Portfolio Three"></a>
+      <a href="/projects/{{$projects[count($projects) - 1]->id}}"><img src="{{ $projects[count($projects) - 1]->image }}" alt="{{ $projects[count($projects) - 1]->title }}"></a>
       <div class="carousel-caption">
-        <h3>Portfolio work three</h3>
-        <p>This is very good game three</p>
+        <h3>{{ $projects[count($projects) - 1]->title }}</h3>
+        <p>{{ $projects[count($projects) - 1]->description }}</p>
       </div>
     </div>
   </div>

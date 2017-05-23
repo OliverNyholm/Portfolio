@@ -14,14 +14,11 @@
     <input type="submit" value="Edit project" class="btn btn-info" style="float:right">
   </form>
 @endif
-<a href="/reviews/create?project_id={{ $project->id }}" class="btn btn-primary" style="float:right">Add new review </a>
 
 <h1>{{$project->title }}</h1>
-<p>{{ $project->developer }}</p>
-<p>Price: {{ $project->price }}</p>
 <p> Created in:
   @foreach ($project->tools as $tool)
-      <a href="/tools/{{ $tool->id }}">{{ $tool->title }} </a>
+      <a href="/tools/{{ $tool->id }}">{{ $tool->name }} </a>
   @endforeach
 </p>
 <div class="container">

@@ -22,6 +22,11 @@ class seed_projects extends Seeder
             "description" => "A local network arena shooter",
             "image" => "http://i.imgur.com/WBRIcLX.jpg"
           ],
+          [ //Behövs en tredje temp för slideshow
+            "title" => "Balls Of Steel COPY",
+            "description" => "A local network arena shooter",
+            "image" => "http://i.imgur.com/WBRIcLX.jpg"
+          ],
         ]);
     }
 }

@@ -10,6 +10,7 @@ class Project extends Model
   public function tools(){
     return $this->belongsToMany('App\Tool');
   }
+
   public function courses(){
     return $this->hasOne('App\Course');
   }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Project;
 use App\Tool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class ProjectController extends Controller
 {
@@ -19,6 +21,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
+
         return view("projects.projects", [
           "projects" => $projects
         ]);
@@ -46,25 +49,20 @@ class ProjectController extends Controller
         $project->title = $request->title;
         $project->description = $request->description;
         $project->image = $request->image;
-
-      /*  if ($project->title == NULL
-        or $project->description == NULL
-        or $project->image == NULL) {
-         return redirect()->back();
-        }
-        else {
-          $project_id = DB::connection->getPdo->lastInsertId();
-          $tool = $request->get("tool");
-
-          DB::table('project_tool')->insert(
-            [
-              "project_id" => $project_id;
-              "tool_id" => $tool->id;
-            ]);
-            $project->save();
-            return view("index");
-        }*/
         $project->save();
+
+        $project_id = $project->id;
+
+        foreach ($request->get("tools") as $tool) {
+            DB::table('project_tool')->insert(
+              [
+                "project_id" => $project_id,
+                "tool_id" => $tool
+              ]
+            );
+        }
+
+        return view("index");
       }
     /**
      * Display the specified resource.
@@ -75,10 +73,10 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::find($id);
-        $tools = Tool::all();
+        $project->tools = $project->tools;
+
         return view("projects.show", [
           "project" => $project,
-          "tools" => $tools
         ]);
     }
 
@@ -110,8 +108,8 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->image = $request->image;
         $project->save();
-        return redirect()->back();
 
+        return redirect()->action('ProjectController@index');
     }
 
     /**
