@@ -28,6 +28,6 @@ class CreateCourseProjectTable extends Migration
      */
     public function down()
     {
-        Shema::drop('course_project');
+        Schema::drop('course_project');
     }
 }
