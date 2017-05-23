@@ -11,6 +11,15 @@ class seed_project_tool extends Seeder
      */
     public function run()
     {
-        //
+      DB::table('project_tool')->insert([
+      [
+        "project_id" => 1,
+        "tool_id" => 1
+      ],
+      [
+        "project_id" => 2,
+        "tool_id" => 1
+      ],
+    ]);
     }
 }

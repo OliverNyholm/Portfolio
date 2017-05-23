@@ -11,6 +11,15 @@ class seed_courses extends Seeder
      */
     public function run()
     {
-        //
+      DB::table('courses')->insert([
+        [
+          "name" => "Spelmotodriven Produktutveckling",
+          "description" => "En rolig kurs"
+        ],
+        [
+          "name" => "C++ med objektorienterad design och analys",
+          "description" => "En hemsk kurs"
+        ],
+      ]);
     }
 }
