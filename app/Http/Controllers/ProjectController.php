@@ -62,7 +62,7 @@ class ProjectController extends Controller
             );
         }
 
-        return view("index");
+        return redirect()->action('ProjectController@index');
       }
     /**
      * Display the specified resource.
@@ -108,8 +108,7 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->image = $request->image;
         $project->save();
-
-        return redirect()->action('ProjectController@index');
+        return redirect()->action('ProjectController@show', ['id' => $id]);
     }
 
     /**
@@ -121,6 +120,6 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         Project::destroy($id);
-        return view("index");
+        return redirect()->action('ProjectController@index');
     }
 }

@@ -43,15 +43,8 @@ class CourseController extends Controller
         $course = new Course;
         $course->name = $request->name;
         $course->description = $request->description;
-
-        if ($course->title == NULL
-        or $course->description == NULL) {
-         return redirect()->back();
-        }
-        else {
-          $course->save();
-          return view("courses.courses");
-        }
+        $course->save();
+        return redirect()->action('CourseController@index');
       }
     /**
      * Display the specified resource.
@@ -95,11 +88,8 @@ class CourseController extends Controller
         $course->name = $request->name;
         $course->description = $request->description;
         $course->save();
+        return redirect()->action('CourseController@show', ['id' => $id]);
 
-        $courses = Course::all();
-        return view("courses.courses", [
-          "courses" => $courses
-        ]);
     }
 
     /**
@@ -111,6 +101,6 @@ class CourseController extends Controller
     public function destroy($id)
     {
         Course::destroy($id);
-        return view("courses.courses");
+        return redirect()->action('CourseController@index');
     }
 }

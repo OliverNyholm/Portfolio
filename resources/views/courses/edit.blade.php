@@ -4,7 +4,7 @@
 
 <h1>Edit {{$course->name}}</h1>
 
-<form action="/courses/{{ $course->id }}" method="post">
+<form action="/courses/{{$course->id}}" method="post">
   {{ method_field('PUT') }}
   {{ csrf_field() }}
   <div class="form-group">
