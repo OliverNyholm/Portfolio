@@ -15,4 +15,13 @@
 </div>
 
 
+<div class="jumbotron">
+  <h1> Contact </h1>
+  <p>Email: christofer.malmberg@gmail.com </p>
+  <p>Phone:
+  <p> <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+      <script type="IN/MemberProfile" data-id="www.linkedin.com/in/christofer-malmberg-6a1b0370" data-format="inline" data-related="false"></script>
+  </p>
+</div>
+
 @endsection

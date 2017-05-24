@@ -45,7 +45,7 @@ class CourseController extends Controller
         $course->description = $request->description;
 
         if ($course->title == NULL
-        or $course->description == NULL) { //Maybe remove and check if image in view
+        or $course->description == NULL) {
          return redirect()->back();
         }
         else {
@@ -95,7 +95,11 @@ class CourseController extends Controller
         $course->name = $request->name;
         $course->description = $request->description;
         $course->save();
-        return view("courses.courses");
+
+        $courses = Course::all();
+        return view("courses.courses", [
+          "courses" => $courses
+        ]);
     }
 
     /**

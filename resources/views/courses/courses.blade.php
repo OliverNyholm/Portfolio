@@ -9,7 +9,6 @@
 <h1>All courses</h1>
 <p>Below is a list of all courses:</p>
 
-
 @foreach ($courses as $course)
     <a href="courses/{{ $course->id }}"><h2>{{ $course->name }}</h2>
 @endforeach
