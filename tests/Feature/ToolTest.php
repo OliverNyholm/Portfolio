@@ -1,0 +1,33 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class ToolTest extends TestCase
+{
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+ public function testProjects()
+    {
+        $response = $this->get('/tools');     			
+    }
+	public function testProjectShow()
+	{
+		$response = $this->get('/tools/1'); 
+	}
+	public function testProjectEdit()
+	{
+		$response = $this->get('/tools/1/edit');
+	}
+	public function testProjectCreate()
+	{
+		$response = $this->get('/tools/1/create');
+	}
+}
